@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 frame_0_img = cv2.imread('../data/image/unscreen-001.png', cv2.IMREAD_COLOR)
-frame_1_img = cv2.imread('../data/image/unscreen-150.png', cv2.IMREAD_COLOR)
+frame_1_img = cv2.imread('../data/image/unscreen-002.png', cv2.IMREAD_COLOR)
 
 resize_for_frame_0_img = cv2.imread('../data/image/unscreen-001.png', cv2.IMREAD_COLOR)
+frame_0_copy_img = cv2.imread('../data/image/unscreen-001.png', cv2.IMREAD_COLOR)
 
 frame_0 = cv2.cvtColor(frame_0_img, cv2.COLOR_BGR2GRAY)
 frame_1 = cv2.cvtColor(frame_1_img, cv2.COLOR_BGR2GRAY)
@@ -33,7 +34,7 @@ for x in range(width):
         dt[y, x] = float(frame_1[y, x]) - float(frame_0[y, x])
 
 # calculate motion vector
-window_size = 13
+window_size = 9
 border = int(window_size / 2)
 A = np.zeros((window_size ** 2, 2), dtype='float64')
 b = np.zeros((window_size ** 2, 1), dtype='float64')
@@ -98,6 +99,3 @@ ax2 = flg.add_subplot(rows, cols, 2)
 ax2.imshow(resize_for_frame_0_img)
 ax2.set_title("Resize Image")
 ax2.axis('off')
-plt.show()
-
-
